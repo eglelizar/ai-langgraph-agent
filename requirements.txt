@@ -1,0 +1,6 @@
+# Reflection Agent - Dependencias para ejecutar main.py y chains.py
+# Instalación: pip install -r requirements.txt
+python-dotenv==1.1.0
+langchain-core==1.2.5
+langchain-openai==1.0.2
+langgraph==1.0.8
