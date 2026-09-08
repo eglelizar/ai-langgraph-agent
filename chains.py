@@ -8,6 +8,12 @@ y evaluar publicaciones de LinkedIn mediante un proceso iterativo de reflexión.
 #------------------------------------------------------------------------------------------------
 # Importamos ChatPromptTemplate para crear plantillas de prompts estructuradas
 # y MessagesPlaceholder para insertar el historial de mensajes en el prompt
+import os
+from dotenv import load_dotenv
+from langchain_groq import ChatGroq
+
+load_dotenv()
+
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 # Importamos el modelo de lenguaje de OpenAI para ejecutar las cadenas
@@ -53,7 +59,21 @@ reflection_prompt = ChatPromptTemplate.from_messages(
 # 3. CREACIÓN DE CADENAS
 #------------------------------------------------------------------------------------------------
 # Instancia del modelo de lenguaje (usa configuración por defecto, típicamente desde .env)
-llm = ChatOpenAI()
+# Reemplazas el texto de ejemplo por la clave que acabas de copiar
+# Prueba con este modelo en OpenRouter:
+llm = ChatGroq(
+    model="openai/gpt-oss-20b",
+    api_key=os.getenv("GROQ_API_KEY"),
+    max_tokens=600,
+    request_timeout=20,  # Falla rápido si no hay respuesta en 20s
+    temperature=0.7
+)
+
+try:
+    res = llm.invoke("Responde 'Conectado a Groq'")
+    print("Éxito:", res.content)
+except Exception as e:
+    print("Detalle del fallo:", e)
 
 # --- Configuración del modelo Ollama si trabajamos en local ---
 # Descargar Ollama de https://ollama.com/download/

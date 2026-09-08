@@ -78,7 +78,7 @@ builder.set_entry_point(GENERATE)
 # Limita las iteraciones para evitar bucles infinitos (ejemplo:máx. ~3 ciclos con 6 mensajes)
 def should_continue(state: MessageGraph):
     # Si hay más de 6 mensajes, damos por finalizado el proceso
-    if len(state["messages"]) > 6:
+    if len(state["messages"]) > 2:
         return END
     # Si no, pasamos al nodo de reflexión para otra ronda de mejora
     return REFLECT
